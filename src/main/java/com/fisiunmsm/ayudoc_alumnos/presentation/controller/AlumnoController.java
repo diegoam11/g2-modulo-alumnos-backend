@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api-alumno/v1/alumnos")
+@RequestMapping("v1/alumnos")
 public class AlumnoController {
 
     private final AlumnoService alumnoService;

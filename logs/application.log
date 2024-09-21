@@ -1,0 +1,28 @@
+2024-09-21 13:10:21 [main] INFO  c.f.a.AyudocAlumnosApplication - Starting AyudocAlumnosApplication using Java 21.0.3 with PID 14656 (C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend\target\classes started by Diego in C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend)
+2024-09-21 13:10:21 [main] DEBUG c.f.a.AyudocAlumnosApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2024-09-21 13:10:21 [main] INFO  c.f.a.AyudocAlumnosApplication - No active profile set, falling back to 1 default profile: "default"
+2024-09-21 13:10:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+2024-09-21 13:10:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 151 ms. Found 2 R2DBC repository interfaces.
+2024-09-21 13:10:24 [main] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 8080 (http)
+2024-09-21 13:10:24 [main] INFO  c.f.a.AyudocAlumnosApplication - Started AyudocAlumnosApplication in 3.334 seconds (process running for 4.162)
+2024-09-21 13:11:48 [main] INFO  c.f.a.AyudocAlumnosApplication - Starting AyudocAlumnosApplication using Java 21.0.3 with PID 12664 (C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend\target\classes started by Diego in C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend)
+2024-09-21 13:11:48 [main] DEBUG c.f.a.AyudocAlumnosApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2024-09-21 13:11:48 [main] INFO  c.f.a.AyudocAlumnosApplication - No active profile set, falling back to 1 default profile: "default"
+2024-09-21 13:11:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+2024-09-21 13:11:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 166 ms. Found 2 R2DBC repository interfaces.
+2024-09-21 13:11:51 [main] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 8080 (http)
+2024-09-21 13:11:51 [main] INFO  c.f.a.AyudocAlumnosApplication - Started AyudocAlumnosApplication in 3.6 seconds (process running for 4.415)
+2024-09-21 13:13:55 [main] INFO  c.f.a.AyudocAlumnosApplication - Starting AyudocAlumnosApplication using Java 21.0.3 with PID 6264 (C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend\target\classes started by Diego in C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend)
+2024-09-21 13:13:55 [main] DEBUG c.f.a.AyudocAlumnosApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2024-09-21 13:13:55 [main] INFO  c.f.a.AyudocAlumnosApplication - No active profile set, falling back to 1 default profile: "default"
+2024-09-21 13:13:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+2024-09-21 13:13:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 220 ms. Found 2 R2DBC repository interfaces.
+2024-09-21 13:13:59 [main] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 8080 (http)
+2024-09-21 13:13:59 [main] INFO  c.f.a.AyudocAlumnosApplication - Started AyudocAlumnosApplication in 4.501 seconds (process running for 5.539)
+2024-09-21 13:14:09 [main] INFO  c.f.a.AyudocAlumnosApplication - Starting AyudocAlumnosApplication using Java 21.0.3 with PID 13608 (C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend\target\classes started by Diego in C:\Users\Diego\Desktop\u\ciclo 8\desarrollo web\g2-modulo-alumnos-backend)
+2024-09-21 13:14:09 [main] DEBUG c.f.a.AyudocAlumnosApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+2024-09-21 13:14:09 [main] INFO  c.f.a.AyudocAlumnosApplication - No active profile set, falling back to 1 default profile: "default"
+2024-09-21 13:14:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+2024-09-21 13:14:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 362 ms. Found 2 R2DBC repository interfaces.
+2024-09-21 13:14:14 [main] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 8080 (http)
+2024-09-21 13:14:14 [main] INFO  c.f.a.AyudocAlumnosApplication - Started AyudocAlumnosApplication in 5.967 seconds (process running for 7.13)

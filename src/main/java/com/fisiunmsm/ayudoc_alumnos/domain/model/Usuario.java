@@ -10,7 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Data
 public class Usuario {
-    @Id
     private Integer id;
     private String username;
     private String password;
