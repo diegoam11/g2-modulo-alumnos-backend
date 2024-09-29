@@ -30,7 +30,7 @@ public class UsuarioService {
     @Transactional
     public Mono<Usuario> registrar(CrearUsuarioDto dto) {
         Usuario usuario = Usuario.builder()
-                .username(dto.getUsername())
+                .username(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .roles(Role.ROLE_ALUMNO.name())
                 .build();

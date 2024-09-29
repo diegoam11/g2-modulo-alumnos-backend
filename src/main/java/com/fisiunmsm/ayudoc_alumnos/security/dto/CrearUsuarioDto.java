@@ -20,7 +20,5 @@ public class CrearUsuarioDto {
     @Email(message = "{validate.email.message}")
     private String email;
     @NotBlank(message = "{validate.notblank.message}")
-    private String username;
-    @NotBlank(message = "{validate.notblank.message}")
     private String password;
 }
