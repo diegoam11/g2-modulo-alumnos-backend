@@ -6,7 +6,6 @@ import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.AlumnoNotasTabl
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.NotaMapper;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.repository.AlumnoNotaRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
