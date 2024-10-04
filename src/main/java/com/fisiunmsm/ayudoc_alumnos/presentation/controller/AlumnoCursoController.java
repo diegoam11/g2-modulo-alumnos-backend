@@ -1,0 +1,39 @@
+package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
+
+import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoCursoService;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCurso;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/api/alumnocursos")
+@CrossOrigin(origins = "http://localhost:5173")
+public class AlumnoCursoController {
+    private final AlumnoCursoService alumnoCursoService;
+
+    public AlumnoCursoController(AlumnoCursoService alumnoCursoService) {
+        this.alumnoCursoService = alumnoCursoService;
+    }
+
+    @GetMapping
+    public Flux<AlumnoCurso> getAllAlumnoCursos() {
+        return alumnoCursoService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Mono<AlumnoCurso> getAlumnoCursoById(@PathVariable Long id) {
+        return alumnoCursoService.findById(id);
+    }
+
+    @GetMapping("/estado/{estado}")
+    public Flux<AlumnoCurso> getAlumnoCursoByEstado(@PathVariable String estado) {
+        return alumnoCursoService.findByEstado(estado);
+    }
+
+    @GetMapping("/alumno/{id}")
+    public Flux<AlumnoCursoDTO> getCursosByAlumnoId(@PathVariable("id") Long alumnoId) {
+        return alumnoCursoService.getCursosByAlumnoId(alumnoId);
+    }
+}
