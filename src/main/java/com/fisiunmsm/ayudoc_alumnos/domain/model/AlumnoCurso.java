@@ -12,9 +12,9 @@ public class AlumnoCurso {
     @Id
     private Long id;
     private Long alumnoid;
-    private Integer cursoid;
-    private Integer periodoid;
-    private Integer institucionid;
-    private Integer departamentoid;
+    private Long cursoid;
+    private Long periodoid;
+    private Long institucionid;
+    private Long departamentoid;
     private String estado;
 }
