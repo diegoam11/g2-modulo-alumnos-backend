@@ -1,7 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.CursoService;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcion.CursoDecoder;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.CursoDecoder;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.CursoTable;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion.CursoMapper;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.repository.CursoRepository;

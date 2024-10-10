@@ -3,7 +3,7 @@ package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoCursoService;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcion.InscripcionRequest;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

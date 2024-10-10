@@ -1,4 +1,4 @@
-package com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcion;
+package com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

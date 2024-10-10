@@ -1,5 +1,5 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcion.InscripcionRequest;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.CursoTable;
 import org.springframework.stereotype.Service;
