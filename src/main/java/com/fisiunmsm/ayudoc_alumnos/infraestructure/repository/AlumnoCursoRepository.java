@@ -1,7 +1,5 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
-
-import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCurso;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
 import org.springframework.data.r2dbc.repository.Query;

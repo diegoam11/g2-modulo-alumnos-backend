@@ -1,14 +1,13 @@
-package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion.mapper;
-
+package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcion.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.CursoTable;
-import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion.DTO.AlumnoCursoRequest;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AlumnoCursoMapper {
-    public AlumnoCursoTable toAlumnoCurso(AlumnoCursoRequest request, CursoTable curso) {
-                return AlumnoCursoTable.builder()
+    public AlumnoCursoTable toAlumnoCurso(InscripcionRequest request, CursoTable curso) {
+        return AlumnoCursoTable.builder()
                 .alumnoid(request.getAlumnoid())
                 .cursoid(curso.getId())
                 .periodoid(curso.getPeriodoacademicoid())

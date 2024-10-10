@@ -14,7 +14,6 @@ public class CursoTable {
 
     @Id
     private Long id;
-
     private String codigo;
     private String nombre;
     private String tipo;
@@ -31,6 +30,5 @@ public class CursoTable {
     private String sumilla;
     private String modalidad;
     private String etiquetas;
-
 
 }

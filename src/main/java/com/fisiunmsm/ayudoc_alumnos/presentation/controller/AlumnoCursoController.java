@@ -2,10 +2,9 @@ package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoCursoService;
 
-import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCurso;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcion.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
-import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion.DTO.AlumnoCursoRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,12 +38,11 @@ public class AlumnoCursoController {
         return alumnoCursoService.getCursosByAlumnoId(alumnoId);
     }
 
-    @PostMapping("/inscribir")
-    public Mono<ResponseEntity<AlumnoCursoTable>> agregarAlumnoACurso(
-            @RequestBody AlumnoCursoRequest request) {
-
-        return alumnoCursoService.agregarAlumnoACurso(request)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.badRequest().build());
+    @PostMapping("/inscripcion")
+    public Mono<ResponseEntity<String>> inscribirAlumno(@RequestBody InscripcionRequest request) {
+        return alumnoCursoService.inscribirAlumno(request)
+                .then(Mono.just(ResponseEntity.ok("Inscripción exitosa")))
+                .onErrorReturn(ResponseEntity.badRequest().body("Error en la inscripción"));
     }
+
 }

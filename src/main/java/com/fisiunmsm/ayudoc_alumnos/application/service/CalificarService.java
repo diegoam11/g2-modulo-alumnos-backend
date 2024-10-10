@@ -4,6 +4,7 @@ import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.NotaResponse;
 import reactor.core.publisher.Mono;
 
 public interface CalificarService {
+    //testing purposes
     Mono<NotaResponse> calificarNota(Long alumnoId, Long cursoId, Long componentenotaId, Double nuevaNota);
     Mono<NotaResponse> crearNota(Long alumnoId, Long cursoId, Long componentenotaId, Double nuevaNota);
 }
