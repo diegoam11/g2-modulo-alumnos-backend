@@ -1,7 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoGrupoService;
-import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion.AlumnoGrupoTable;
+import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoGrupoTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

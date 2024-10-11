@@ -1,7 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoGrupoService;
-import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion.AlumnoGrupoTable;
+import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoGrupoTable;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.repository.AlumnoCursoRepository;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.repository.AlumnoGrupoRepository;
 import lombok.AllArgsConstructor;

@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoCursoService;
 
+import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class AlumnoCursoController {
     private final AlumnoCursoService alumnoCursoService;
+    private final AlumnoService alumnoService;
 
     @GetMapping
     public Flux<AlumnoCursoTable> getAllAlumnoCursos() {
@@ -41,8 +43,11 @@ public class AlumnoCursoController {
     @PostMapping("/inscripcion")
     public Mono<ResponseEntity<String>> inscribirAlumno(@RequestBody InscripcionRequest request) {
         return alumnoCursoService.inscribirAlumno(request)
-                .then(Mono.just(ResponseEntity.ok("Inscripción exitosa")))
-                .onErrorReturn(ResponseEntity.badRequest().body("Error en la inscripción"));
+                .then(Mono.just(ResponseEntity.status(201).body("Inscripción exitosa"))) // 201 Created
+                .onErrorResume(ex ->
+                        Mono.just(ResponseEntity.status(400).body(ex.getMessage())) // 400 Bad Request con el mensaje de error personalizado
+                );
     }
+
 
 }

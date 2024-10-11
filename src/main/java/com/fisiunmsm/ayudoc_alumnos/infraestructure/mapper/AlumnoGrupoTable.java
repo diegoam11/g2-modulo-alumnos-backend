@@ -1,4 +1,4 @@
-package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion;
+package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

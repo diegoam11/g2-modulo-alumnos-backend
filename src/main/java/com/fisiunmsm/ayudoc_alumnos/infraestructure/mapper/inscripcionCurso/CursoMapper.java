@@ -1,4 +1,4 @@
-package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcion;
+package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcionCurso;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.CursoDecoder;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.CursoTable;
