@@ -77,7 +77,7 @@ CREATE TABLE `alumnocurso` (
   KEY `alumnocurso_curso_idx` (`cursoid`),
   KEY `alumnocurso_periodo_idx` (`periodoid`),
   KEY `alumnocurso_institucion_idx` (`institucionid`),
-  CONSTRAINT `alumnocurso_curso` FOREIGN KEY (`cursoid`) REFERENCES `curso` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `alumnocurso_curso` FOREIGN KEY (`cursoid`) REFERENCES `cursoDecoder` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `alumnocurso_institucion` FOREIGN KEY (`institucionid`) REFERENCES `institucion` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `alumnocurso_periodo` FOREIGN KEY (`periodoid`) REFERENCES `periodoacademico` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -280,13 +280,13 @@ INSERT INTO `componentecompetencia` VALUES (1,7,1,NULL),(2,7,5,NULL),(3,8,1,NULL
 UNLOCK TABLES;
 
 --
--- Table structure for table `curso`
+-- Table structure for table `cursoDecoder`
 --
 
-DROP TABLE IF EXISTS `curso`;
+DROP TABLE IF EXISTS `cursoDecoder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `curso` (
+CREATE TABLE `cursoDecoder` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(12) NOT NULL,
   `nombre` varchar(60) NOT NULL,
@@ -316,13 +316,13 @@ CREATE TABLE `curso` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `curso`
+-- Dumping data for table `cursoDecoder`
 --
 
-LOCK TABLES `curso` WRITE;
-/*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (1,'50W0100','Análisis y Diseño de Software - G1 - 2023-I','obligatorio',3,0,2,NULL,4.00,'VII','1',1,2,1,3,NULL,NULL,NULL),(3,'50W0102','Arquitecturas Modernas - G1 - 2023-I','obligatorio',3,0,2,NULL,4.00,'VII','1',1,1,1,3,NULL,NULL,'Arquitectura'),(7,'50W0103','Desarrollo de Software - G1 - 2023-II','obligatorio',3,0,2,NULL,3.00,'VIII','1',1,1,1,3,NULL,NULL,NULL),(8,'50W0104','Métodos y Técnicas de Diseño - G2 - 2023-II','obligatorio',3,0,2,NULL,4.00,'VI','1',2,1,1,3,NULL,NULL,'Diseño'),(9,'50W0105','Metodologías Ágiles - G1 - 2023-II','obligatorio',2,0,2,NULL,3.00,'X','1',2,1,1,3,NULL,NULL,NULL),(20,'50W0104','Métodos y Técnicas de Diseño - G1 - 2024-I','obligatorio',3,0,2,NULL,4.00,'VI','1',3,1,1,3,NULL,NULL,'Diseño'),(21,'50W0102','Arquitecturas Modernas - G2 - 2024-I','obligatorio',3,0,2,NULL,4.00,'VII','1',3,1,1,3,NULL,NULL,'Arquitectura-Diseño'),(22,'50W0100','Análisis y Diseño de Software - G2 - 2024-I','obligatorio',3,0,2,NULL,4.00,'VII','1',3,2,1,3,NULL,NULL,'Diseño');
-/*!40000 ALTER TABLE `curso` ENABLE KEYS */;
+LOCK TABLES `cursoDecoder` WRITE;
+/*!40000 ALTER TABLE `cursoDecoder` DISABLE KEYS */;
+INSERT INTO `cursoDecoder` VALUES (1,'50W0100','Análisis y Diseño de Software - G1 - 2023-I','obligatorio',3,0,2,NULL,4.00,'VII','1',1,2,1,3,NULL,NULL,NULL),(3,'50W0102','Arquitecturas Modernas - G1 - 2023-I','obligatorio',3,0,2,NULL,4.00,'VII','1',1,1,1,3,NULL,NULL,'Arquitectura'),(7,'50W0103','Desarrollo de Software - G1 - 2023-II','obligatorio',3,0,2,NULL,3.00,'VIII','1',1,1,1,3,NULL,NULL,NULL),(8,'50W0104','Métodos y Técnicas de Diseño - G2 - 2023-II','obligatorio',3,0,2,NULL,4.00,'VI','1',2,1,1,3,NULL,NULL,'Diseño'),(9,'50W0105','Metodologías Ágiles - G1 - 2023-II','obligatorio',2,0,2,NULL,3.00,'X','1',2,1,1,3,NULL,NULL,NULL),(20,'50W0104','Métodos y Técnicas de Diseño - G1 - 2024-I','obligatorio',3,0,2,NULL,4.00,'VI','1',3,1,1,3,NULL,NULL,'Diseño'),(21,'50W0102','Arquitecturas Modernas - G2 - 2024-I','obligatorio',3,0,2,NULL,4.00,'VII','1',3,1,1,3,NULL,NULL,'Arquitectura-Diseño'),(22,'50W0100','Análisis y Diseño de Software - G2 - 2024-I','obligatorio',3,0,2,NULL,4.00,'VII','1',3,2,1,3,NULL,NULL,'Diseño');
+/*!40000 ALTER TABLE `cursoDecoder` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -340,7 +340,7 @@ CREATE TABLE `cursocompetencia` (
   KEY `curso_competencia_idx` (`cursoid`),
   KEY `competencia_competencia_idx` (`competenciaid`),
   CONSTRAINT `competencia_competencia` FOREIGN KEY (`competenciaid`) REFERENCES `competencia` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `curso_competencia` FOREIGN KEY (`cursoid`) REFERENCES `curso` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `curso_competencia` FOREIGN KEY (`cursoid`) REFERENCES `cursoDecoder` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -380,7 +380,7 @@ CREATE TABLE `cursocomponente` (
   KEY `cursocomponente_evaluacion_idx` (`evaluacionid`) /*!80000 INVISIBLE */,
   KEY `cursocomponente_curso_idx` (`cursoid`),
   KEY `cursocomponente_institucion_idx` (`institucionid`),
-  CONSTRAINT `cursocomponente_curso` FOREIGN KEY (`cursoid`) REFERENCES `curso` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `cursocomponente_curso` FOREIGN KEY (`cursoid`) REFERENCES `cursoDecoder` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `cursocomponente_evaluacion` FOREIGN KEY (`evaluacionid`) REFERENCES `evaluacion` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `cursocomponente_institucion` FOREIGN KEY (`institucionid`) REFERENCES `institucion` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=367 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -493,7 +493,7 @@ CREATE TABLE `evaluacion` (
 
 LOCK TABLES `evaluacion` WRITE;
 /*!40000 ALTER TABLE `evaluacion` DISABLE KEYS */;
-INSERT INTO `evaluacion` VALUES (1,'EES','Evaluación Escrita','1',1,NULL),(2,'EOR','Evaluación Oral','1',1,NULL),(3,'RBR','Rúbrica','1',1,NULL),(4,'PRY','Proyecto del curso','1',1,NULL);
+INSERT INTO `evaluacion` VALUES (1,'EES','Evaluación Escrita','1',1,NULL),(2,'EOR','Evaluación Oral','1',1,NULL),(3,'RBR','Rúbrica','1',1,NULL),(4,'PRY','Proyecto del cursoDecoder','1',1,NULL);
 /*!40000 ALTER TABLE `evaluacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
