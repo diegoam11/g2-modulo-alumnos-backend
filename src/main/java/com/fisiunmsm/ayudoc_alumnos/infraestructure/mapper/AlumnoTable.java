@@ -2,9 +2,11 @@ package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.Alumno;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import reactor.core.publisher.Mono;
 
@@ -12,6 +14,7 @@ import reactor.core.publisher.Mono;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Table("alumno")
 public class AlumnoTable {
     @Id
@@ -23,7 +26,8 @@ public class AlumnoTable {
     private String estado;
     private String institucionId;
     private String departamentoId;
-    private String usuarioId;
+    @Column("usuarioid")
+    private Long usuarioId;
 
     public Alumno toDomainModel(){
         return new Alumno(
