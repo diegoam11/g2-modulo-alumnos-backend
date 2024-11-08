@@ -7,4 +7,6 @@ import reactor.core.publisher.Mono;
 public interface AlumnoService {
     Flux<Alumno> findAll();
     Mono<Alumno> findById(Long id);
+    Mono<Alumno> findAlumnoByUsername(String username);
+    Mono<Long> findIdByUsername(String username);
 }

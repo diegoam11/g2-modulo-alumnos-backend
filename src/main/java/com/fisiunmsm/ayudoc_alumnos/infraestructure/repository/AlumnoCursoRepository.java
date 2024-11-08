@@ -12,7 +12,7 @@ public interface AlumnoCursoRepository extends R2dbcRepository<AlumnoCursoTable,
     Flux<AlumnoCursoTable> findByEstado(String estado);
     @Query("SELECT ac.alumnoid, c.id as cursoid, c.nombre as nombre, c.codigo as codigo, c.tipo as tipo, ac.estado " +
             "FROM alumnocurso ac " +
-            "JOIN curso c ON ac.cursoid = c.id " +
+            "JOIN cursoDecoder c ON ac.cursoid = c.id " +
             "WHERE ac.alumnoid = :alumnoId")
     Flux<AlumnoCursoDTO> findCursosByAlumnoId(@Param("alumnoId") Long alumnoId);
 

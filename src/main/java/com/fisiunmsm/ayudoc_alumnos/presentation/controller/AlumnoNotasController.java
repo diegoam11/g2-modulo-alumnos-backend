@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
-@RequestMapping("/api-notas/v1")
+@RequestMapping("v1/notas")
 public class AlumnoNotasController {
     private final AlumnoNotaService notasService;
 

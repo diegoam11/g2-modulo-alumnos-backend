@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api-cur/v1")
+@RequestMapping("v1/cursos")
 @RequiredArgsConstructor
 public class CursoController {
     private final CursoService cursoService;
