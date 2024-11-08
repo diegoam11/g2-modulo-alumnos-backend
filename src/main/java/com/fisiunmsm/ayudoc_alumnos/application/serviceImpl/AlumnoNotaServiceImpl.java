@@ -31,4 +31,9 @@ public class AlumnoNotaServiceImpl implements AlumnoNotaService {
     public Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(Long alumnoId) {
         return alumnoNotaRepository.findNotasFinalesConPeriodoByAlumnoId(alumnoId);
     }
+
+    @Override
+    public Flux<AlumnoTopReponse> getTopTopAlumnosByComponente(Long cursoId,Long componenteId) {
+        return alumnoNotaRepository.findTopAlumnosByCompo(cursoId,componenteId);
+    }
 }

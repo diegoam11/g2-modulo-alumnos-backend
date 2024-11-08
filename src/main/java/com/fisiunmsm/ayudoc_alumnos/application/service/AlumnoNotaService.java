@@ -10,4 +10,5 @@ public interface AlumnoNotaService {
     Mono<NotaResponse> getNotasDeAlumnoEnCurso(Long alumnoId, Long cursoId);
     Flux<AlumnoTopReponse> getTop5NotasAlumnoPorComponente(Long componenteId, Long cursoId);
     Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(Long alumnoId);
+    Flux<AlumnoTopReponse> getTopTopAlumnosByComponente(Long conmponenteId, Long cursoId);
 }

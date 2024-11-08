@@ -33,4 +33,12 @@ public class AlumnoNotasController {
     public Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(@PathVariable Long alumnoId) {
         return notasService.obtenerNotasAprobadasConPeriodo(alumnoId);
     }
+
+    @GetMapping("/top/{cursoId}/{componenteId}")
+    public Flux<AlumnoTopReponse> getTopNotas(
+            @PathVariable("cursoId") Long cursoId,
+            @PathVariable("componenteId") Long componenteId
+    ) {
+        return notasService.getTopTopAlumnosByComponente(cursoId, componenteId);
+    }
 }

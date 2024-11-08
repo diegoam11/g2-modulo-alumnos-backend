@@ -56,4 +56,15 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
     )
     Flux<AlumnoNotasFinal> findNotasFinalesConPeriodoByAlumnoId(@Param("alumnoId") Long alumnoId);
 
+    @Query("SELECT an.alumnoid, an.cursoid, an.nota, an.id as notaid, " +
+            "a.nombres, a.apellidos, a.codigo as codigoalumno, " +
+            "cc.id as componentenotaid, cc.descripcion " +
+            "FROM cursocomponente cc JOIN alumnonotas an ON cc.id = an.componentenotaid " +
+            "JOIN alumno a ON an.alumnoid = a.id " +
+            "WHERE cc.cursoid = :cursoId AND cc.id = :componenteId "
+    )
+    Flux<AlumnoTopReponse> findTopAlumnosByCompo(
+            @Param("cursoId") Long cursoId,
+            @Param("componenteId") Long componenteId
+    );
 }
