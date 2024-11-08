@@ -1,6 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.NotaResponse;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.NotaMapper;
@@ -24,5 +25,10 @@ public class AlumnoNotaServiceImpl implements AlumnoNotaService {
     @Override
     public Flux<AlumnoTopReponse> getTop5NotasAlumnoPorComponente(Long cursoId,Long componenteId) {
         return alumnoNotaRepository.findTop5AlumnosByCompo(cursoId,componenteId);
+    }
+
+    @Override
+    public Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(Long alumnoId) {
+        return alumnoNotaRepository.findNotasFinalesConPeriodoByAlumnoId(alumnoId);
     }
 }

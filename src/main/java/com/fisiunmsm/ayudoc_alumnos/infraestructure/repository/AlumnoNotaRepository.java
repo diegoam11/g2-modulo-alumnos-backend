@@ -1,5 +1,6 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoNota;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.AlumnoNotasTable;
@@ -42,4 +43,17 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
             @Param("cursoId") Long cursoId,
             @Param("componenteId") Long componenteId
     );
+    @Query("SELECT an.alumnoid, an.cursoid, " +
+            " c.nombre, an.nota,c.ciclo,c.numCreditos as numcreditos , " +
+            " pa.id as periodoid,pa.codigo as periodocodigo,pa.descripcion as periododescripcion" +
+            " FROM alumnonotas an " +
+            " INNER JOIN alumnocurso ac ON an.cursoid = ac.cursoid AND an.alumnoid = ac.alumnoid " +
+            " INNER JOIN cursocomponente cc ON an.componentenotaid = cc.id " +
+            " LEFT JOIN cursoDecoder c on ac.cursoid = c.id " +
+            " LEFT JOIN periodoacademico pa on ac.periodoid = pa.id " +
+            " WHERE an.alumnoid = :alumnoId AND cc.padreid IS NULL" +
+            " ORDER BY cc.id"
+    )
+    Flux<AlumnoNotasFinal> findNotasFinalesConPeriodoByAlumnoId(@Param("alumnoId") Long alumnoId);
+
 }
