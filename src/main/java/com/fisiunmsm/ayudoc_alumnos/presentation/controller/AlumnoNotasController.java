@@ -1,6 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.NotaResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
-@RequestMapping("/api-notas/v1")
+@RequestMapping("v1/notas")
 public class AlumnoNotasController {
     private final AlumnoNotaService notasService;
 
@@ -27,5 +28,9 @@ public class AlumnoNotasController {
             @PathVariable("componenteId") Long componenteId
             ) {
         return notasService.getTop5NotasAlumnoPorComponente(cursoId, componenteId);
+    }
+    @GetMapping("/finales/alumno/{alumnoId}")
+    public Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(@PathVariable Long alumnoId) {
+        return notasService.obtenerNotasAprobadasConPeriodo(alumnoId);
     }
 }
