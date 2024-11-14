@@ -1,4 +1,4 @@
-package com.fisiunmsm.ayudoc_alumnos.domain.model.notas;
+package com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

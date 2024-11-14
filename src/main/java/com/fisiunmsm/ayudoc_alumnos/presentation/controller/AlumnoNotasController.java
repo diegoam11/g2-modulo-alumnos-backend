@@ -1,12 +1,16 @@
 package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoTopReponse;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.NotaResponse;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -27,5 +31,12 @@ public class AlumnoNotasController {
             @PathVariable("componenteId") Long componenteId
             ) {
         return notasService.getTop5NotasAlumnoPorComponente(cursoId, componenteId);
+    }
+    @GetMapping("/curso/{cursoId}/competencia/{competenciaId}/alumno/{alumnoId}")
+    public Flux<NotasDTO> obtenerNotasPorCompetenciaCursoAlumno(
+            @PathVariable Long competenciaId,
+            @PathVariable Long cursoId,
+            @PathVariable Long alumnoId) {
+        return notasService.obtenerNotasPorCompetenciaCursoAlumno(competenciaId, cursoId, alumnoId);
     }
 }

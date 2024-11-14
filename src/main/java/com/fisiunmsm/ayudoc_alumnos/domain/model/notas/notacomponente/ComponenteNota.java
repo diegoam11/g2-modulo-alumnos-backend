@@ -1,4 +1,4 @@
-package com.fisiunmsm.ayudoc_alumnos.domain.model.notas;
+package com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

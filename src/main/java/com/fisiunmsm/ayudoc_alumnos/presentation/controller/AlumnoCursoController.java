@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("v1/alucur")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 @RequiredArgsConstructor
 public class AlumnoCursoController {
     private final AlumnoCursoService alumnoCursoService;
