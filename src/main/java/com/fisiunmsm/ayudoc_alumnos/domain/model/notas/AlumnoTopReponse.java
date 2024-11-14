@@ -19,4 +19,5 @@ public class AlumnoTopReponse {
     private String apellidos;
     private String codigoalumno;
     private String descripcion;
+    private Integer posicion;
 }

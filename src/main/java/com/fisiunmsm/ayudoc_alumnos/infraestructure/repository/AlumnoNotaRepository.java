@@ -58,13 +58,33 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
 
     @Query("SELECT an.alumnoid, an.cursoid, an.nota, an.id as notaid, " +
             "a.nombres, a.apellidos, a.codigo as codigoalumno, " +
-            "cc.id as componentenotaid, cc.descripcion " +
-            "FROM cursocomponente cc JOIN alumnonotas an ON cc.id = an.componentenotaid " +
+            "cc.id as componentenotaid, cc.descripcion, " +
+            "ROW_NUMBER() OVER (ORDER BY an.nota DESC) AS posicion " +
+            "FROM cursocomponente cc " +
+            "JOIN alumnonotas an ON cc.id = an.componentenotaid " +
             "JOIN alumno a ON an.alumnoid = a.id " +
-            "WHERE cc.cursoid = :cursoId AND cc.id = :componenteId "
+            "WHERE cc.cursoid = :cursoId AND cc.id = :componenteId " +
+            "ORDER BY an.nota DESC"
     )
     Flux<AlumnoTopReponse> findTopAlumnosByCompo(
             @Param("cursoId") Long cursoId,
             @Param("componenteId") Long componenteId
+    );
+
+    @Query("SELECT * FROM (" +
+            "    SELECT an.alumnoid, an.cursoid, an.nota, an.id as notaid, " +
+            "           a.nombres, a.apellidos, a.codigo as codigoalumno, " +
+            "           cc.id as componentenotaid, cc.descripcion, " +
+            "           ROW_NUMBER() OVER (ORDER BY an.nota DESC) AS posicion " +
+            "    FROM cursocomponente cc " +
+            "    JOIN alumnonotas an ON cc.id = an.componentenotaid " +
+            "    JOIN alumno a ON an.alumnoid = a.id " +
+            "    WHERE cc.cursoid = :cursoId AND cc.id = :componenteId " +
+            ") AS ranked_alumnos " +
+            "WHERE ranked_alumnos.alumnoid = :alumnoId")
+    Flux<AlumnoTopReponse> findAlumnoPositionByCompo(
+            @Param("cursoId") Long cursoId,
+            @Param("componenteId") Long componenteId,
+            @Param("alumnoId") Long alumnoId
     );
 }

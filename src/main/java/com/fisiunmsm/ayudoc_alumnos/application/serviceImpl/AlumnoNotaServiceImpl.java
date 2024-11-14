@@ -36,4 +36,9 @@ public class AlumnoNotaServiceImpl implements AlumnoNotaService {
     public Flux<AlumnoTopReponse> getTopTopAlumnosByComponente(Long cursoId,Long componenteId) {
         return alumnoNotaRepository.findTopAlumnosByCompo(cursoId,componenteId);
     }
+
+    @Override
+    public Flux<AlumnoTopReponse> getAlumnoPositionByComponente(Long cursoId, Long componenteId, Long alumnoId) {
+        return alumnoNotaRepository.findAlumnoPositionByCompo(cursoId, componenteId, alumnoId);
+    }
 }

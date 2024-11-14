@@ -41,4 +41,13 @@ public class AlumnoNotasController {
     ) {
         return notasService.getTopTopAlumnosByComponente(cursoId, componenteId);
     }
+
+    @GetMapping("/top/{cursoId}/{componenteId}/{alumnoId}")
+    public Flux<AlumnoTopReponse> getAlumnoPosition(
+            @PathVariable("cursoId") Long cursoId,
+            @PathVariable("componenteId") Long componenteId,
+            @PathVariable("alumnoId") Long alumnoId
+    ) {
+        return notasService.getAlumnoPositionByComponente(cursoId, componenteId, alumnoId);
+    }
 }
