@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api-cur/v1")
+@RequestMapping("v1/cursos")
 @RequiredArgsConstructor
 public class CursoController {
     private final CursoService cursoService;
@@ -19,5 +19,8 @@ public class CursoController {
     public Mono<CursoTable> obtenerCursoPorCodigo(@PathVariable String codigo) {
         return cursoService.decodificarCodigoCurso(codigo);
     }
-
+    @GetMapping("/{cursoId}")
+    public Mono<CursoTable> obtenerCursoPorId(@PathVariable Long cursoId) {
+        return cursoService.findCursoTableById(cursoId);
+    }
 }

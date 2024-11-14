@@ -13,8 +13,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api-alucur/v1")
-@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("v1/alucur")
+@CrossOrigin
 @RequiredArgsConstructor
 public class AlumnoCursoController {
     private final AlumnoCursoService alumnoCursoService;
@@ -48,6 +48,4 @@ public class AlumnoCursoController {
                         Mono.just(ResponseEntity.status(400).body(ex.getMessage())) // 400 Bad Request con el mensaje de error personalizado
                 );
     }
-
-
 }

@@ -1,16 +1,15 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoNota;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoTopReponse;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.AlumnoNotasTable;
-import org.springframework.data.r2dbc.repository.Modifying;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Repository
 public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, Long> {
@@ -24,13 +23,6 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
             "ORDER BY cc.id"
     )
     Flux<AlumnoNota> findNotasComponente(@Param("alumnoId") Long alumnoId, @Param("cursoId") Long cursoId);
-    //testing purposes
-    @Modifying
-    @Query("UPDATE alumnonotas SET nota = :nota " +
-            "WHERE componentenotaid = :componentenotaid " +
-            "AND alumnoid = :alumnoId AND cursoid = :cursoId")
-    Mono<Void> updateNota(@Param("nota") Double nota,@Param("componentenotaid") Long componentenotaid,
-                          @Param("alumnoId") Long alumnoId,@Param("cursoId") Long cursoId);
     @Query("SELECT an.alumnoid, an.cursoid, an.nota, an.id as notaid, " +
             "a.nombres, a.apellidos, a.codigo as codigoalumno, " +
             "cc.id as componentenotaid, cc.descripcion " +
@@ -56,4 +48,20 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
     )
     Flux<AlumnoNotasFinal> findNotasFinalesConPeriodoByAlumnoId(@Param("alumnoId") Long alumnoId);
 
+    @Query("SELECT an.id as notaid, an.nota, " +
+            "cuco.id AS componentenotaid, cuco.cursoid as curso_id, " +
+            "cuco.codigo as componentecodigo, cuco.descripcion as componentedescripcion " +
+            "FROM cursocomponente cuco " +
+            "INNER JOIN alumnonotas an ON cuco.id = an.componentenotaid " +
+            "AND an.alumnoid = :alumnoId AND an.cursoid = :cursoId " +
+            "LEFT JOIN cursocompetencia cuc ON cuco.cursoid = cuc.cursoid " +
+            "LEFT JOIN competencia cia ON cuc.competenciaid = cia.id " +
+            "WHERE cia.id = :competenciaId " +
+            "GROUP BY an.alumnoid, an.nota, cuco.id, cuco.cursoid, cia.id, " +
+            "cia.codigo, cia.nombre, cuco.codigo, an.id " +
+            "ORDER BY cia.id, cuco.id")
+    Flux<NotasDTO> findNotasByCompetenciaCursoAlumno(
+            @Param("competenciaId") Long competenciaId,
+            @Param("cursoId") Long cursoId,
+            @Param("alumnoId") Long alumnoId);
 }

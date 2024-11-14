@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api-grupos/v1")
+@RequestMapping("v1/grupos")
 @CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class AlumnoGrupoController {

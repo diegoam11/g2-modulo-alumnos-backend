@@ -1,9 +1,9 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas;
 
 
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoNota;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.ComponenteNota;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.NotaResponse;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.ComponenteNota;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

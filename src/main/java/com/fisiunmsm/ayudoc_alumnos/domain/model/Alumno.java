@@ -16,8 +16,8 @@ public class Alumno {
     private String apellidos;
     private String email;
     private String estado;
-    private String institucionId;
-    private String departamentoId;
+    private String institucionid;
+    private String departamentoid;
     private Long usuarioId;
 }
 

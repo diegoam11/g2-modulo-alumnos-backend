@@ -24,5 +24,8 @@ public class AlumnoController {
     public Mono<Alumno> findById(@PathVariable Long id) {
         return alumnoService.findById(id);
     }
-
+    @GetMapping("/user/{username}")
+    public Mono<Alumno> findByUsername(@PathVariable String username) {
+        return alumnoService.findAlumnoByUsername(username);
+    }
 }
