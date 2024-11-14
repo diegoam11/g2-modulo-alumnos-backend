@@ -19,5 +19,8 @@ public class CursoController {
     public Mono<CursoTable> obtenerCursoPorCodigo(@PathVariable String codigo) {
         return cursoService.decodificarCodigoCurso(codigo);
     }
-
+    @GetMapping("/{cursoId}")
+    public Mono<CursoTable> obtenerCursoPorId(@PathVariable Long cursoId) {
+        return cursoService.findCursoTableById(cursoId);
+    }
 }
