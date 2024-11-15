@@ -1,5 +1,6 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfoPartOne;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
@@ -21,4 +22,11 @@ public interface AlumnoRepository extends R2dbcRepository<AlumnoTable, Long> {
             " ON u.id = a.usuarioid WHERE username = :username"
     )
     Mono<Long> findIdbyUsername(@Param("username") String username);
+
+    @Query("SELECT al.estado AS estado, i.nombreLargo AS universidad, d.nombre AS facultad " +
+            "FROM alumno al " +
+            "INNER JOIN institucion i ON i.id = al.institucionid " +
+            "INNER JOIN departamento d ON d.id = al.departamentoid " +
+            "WHERE al.id = :alumnoId")
+    Mono<AlumnoInfoPartOne> getInfoAcademicaPartOne(@Param("alumnoId") Long alumnoId);
 }
