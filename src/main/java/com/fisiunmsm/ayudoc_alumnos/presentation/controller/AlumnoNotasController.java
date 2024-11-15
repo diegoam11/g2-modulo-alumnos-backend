@@ -50,4 +50,11 @@ public class AlumnoNotasController {
     ) {
         return notasService.getAlumnoPositionByComponente(cursoId, componenteId, alumnoId);
     }
+
+    @GetMapping("/cursos/status/{alumnoId}")
+    public Mono<AlumnoTopReponse> getCursosAprobadosDesaprobados(
+            @PathVariable("alumnoId") Long alumnoId
+    ) {
+        return notasService.getCursosAprobadosDesaprobados(alumnoId);
+    }
 }

@@ -41,4 +41,9 @@ public class AlumnoNotaServiceImpl implements AlumnoNotaService {
     public Flux<AlumnoTopReponse> getAlumnoPositionByComponente(Long cursoId, Long componenteId, Long alumnoId) {
         return alumnoNotaRepository.findAlumnoPositionByCompo(cursoId, componenteId, alumnoId);
     }
+
+    @Override
+    public Mono<AlumnoTopReponse> getCursosAprobadosDesaprobados(Long alumnoId) {
+        return alumnoNotaRepository.countCursosAprobadosDesaprobados(alumnoId);
+    }
 }

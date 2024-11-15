@@ -87,4 +87,13 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
             @Param("componenteId") Long componenteId,
             @Param("alumnoId") Long alumnoId
     );
+
+    @Query("SELECT " +
+            "COALESCE(SUM(CASE WHEN an.nota >= 11 THEN 1 ELSE 0 END), 0) AS totalAprobados, " +
+            "COALESCE(SUM(CASE WHEN an.nota < 11 THEN 1 ELSE 0 END), 0) AS totalDesaprobados " +
+            "FROM alumnonotas an " +
+            "WHERE an.alumnoid = :alumnoId")
+    Mono<AlumnoTopReponse> countCursosAprobadosDesaprobados(
+            @Param("alumnoId") Long alumnoId
+    );
 }

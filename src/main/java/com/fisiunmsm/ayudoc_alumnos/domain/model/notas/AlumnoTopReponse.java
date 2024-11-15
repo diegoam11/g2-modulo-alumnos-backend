@@ -20,4 +20,6 @@ public class AlumnoTopReponse {
     private String codigoalumno;
     private String descripcion;
     private Integer posicion;
+    private Integer totalAprobados;
+    private Integer totalDesaprobados;
 }

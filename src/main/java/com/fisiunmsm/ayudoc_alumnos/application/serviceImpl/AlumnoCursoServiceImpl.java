@@ -48,10 +48,10 @@ public class AlumnoCursoServiceImpl implements AlumnoCursoService {
         var cursoMono = cursoService.decodificarCodigoCurso(request.getCodigo())
                 .switchIfEmpty(Mono.error(new RuntimeException("Error: Código de curso no encontrado"))); // Verificación de existencia del curso
 
-        return Mono.zip(alumnoMono, cursoMono) // Combina los resultados en paralelo
+        return Mono.zip(alumnoMono, cursoMono)
             .flatMap(alumnoCurso -> {
-                var alumno = alumnoCurso.getT1(); // Alumno obtenido
-                var curso = alumnoCurso.getT2(); // Curso obtenido
+                var alumno = alumnoCurso.getT1();
+                var curso = alumnoCurso.getT2();
                 AlumnoCursoTable alumnocurso = alumnoCursoMapper.toAlumnoCurso(request, curso);
                 return alumnoCursoRepository.save(alumnocurso).then();
             });
