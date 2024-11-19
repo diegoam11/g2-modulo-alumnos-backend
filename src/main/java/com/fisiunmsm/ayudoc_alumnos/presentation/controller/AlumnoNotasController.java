@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
@@ -9,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -36,11 +35,10 @@ public class AlumnoNotasController {
     public Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(@PathVariable Long alumnoId) {
         return notasService.obtenerNotasAprobadasConPeriodo(alumnoId);
     }
-    @GetMapping("/curso/{cursoId}/competencia/{competenciaId}/alumno/{alumnoId}")
-    public Flux<NotasDTO> obtenerNotasPorCompetenciaCursoAlumno(
-            @PathVariable Long competenciaId,
+    @GetMapping("/competencias/curso/{cursoId}/alumno/{alumnoId}")
+    public Flux<CompetenciaNotaDTO> findNotasCompetenciaByAlumnoAndCurso(
             @PathVariable Long cursoId,
             @PathVariable Long alumnoId) {
-        return notasService.obtenerNotasPorCompetenciaCursoAlumno(competenciaId, cursoId, alumnoId);
+        return notasService.findNotasCompetenciaByAlumnoAndCurso(cursoId, alumnoId);
     }
 }
