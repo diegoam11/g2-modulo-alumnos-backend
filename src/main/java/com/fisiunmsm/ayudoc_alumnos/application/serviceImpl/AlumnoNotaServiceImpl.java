@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
@@ -32,7 +33,10 @@ public class AlumnoNotaServiceImpl implements AlumnoNotaService {
     public Flux<AlumnoNotasFinal> obtenerNotasAprobadasConPeriodo(Long alumnoId) {
         return alumnoNotaRepository.findNotasFinalesConPeriodoByAlumnoId(alumnoId);
     }
-    public Flux<NotasDTO> obtenerNotasPorCompetenciaCursoAlumno(Long competenciaId, Long cursoId, Long alumnoId) {
-        return alumnoNotaRepository.findNotasByCompetenciaCursoAlumno(competenciaId, cursoId, alumnoId);
+
+    @Override
+    public Flux<CompetenciaNotaDTO> findNotasCompetenciaByAlumnoAndCurso(Long cursoId, Long alumnoId) {
+        return alumnoNotaRepository.findNotasCompetenciaByAlumnoAndCurso(cursoId, alumnoId);
     }
+
 }

@@ -3,6 +3,7 @@ package com.fisiunmsm.ayudoc_alumnos.security.jwt;
 import com.fisiunmsm.ayudoc_alumnos.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.lang.NonNull;
@@ -20,15 +21,30 @@ public class JwtFilter implements WebFilter {
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getPath().value();
-        if(path.contains("auth"))
+
+        // Permitir solicitudes preflight (OPTIONS)
+        if (request.getMethod() == HttpMethod.OPTIONS) {
             return chain.filter(exchange);
+        }
+
+        // Permitir solicitudes a rutas de autenticación
+        if (path.contains("auth")) {
+            return chain.filter(exchange);
+        }
+
         String auth = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        if(auth == null)
+
+        if (auth == null) {
             return Mono.error(new CustomException(HttpStatus.BAD_REQUEST, "No token was found."));
-        if(!auth.startsWith("Bearer "))
+        }
+
+        if (!auth.startsWith("Bearer ")) {
             return Mono.error(new CustomException(HttpStatus.BAD_REQUEST, "Invalid token."));
+        }
+
         String token = auth.replace("Bearer ", "");
         exchange.getAttributes().put("token", token);
         return chain.filter(exchange);
     }
+
 }

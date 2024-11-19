@@ -9,15 +9,15 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class CompetenciaNota {
-    private String competenciaid;
-    private String competenciacodigo;
-    private String competencianombre;
+public class CompetenciaNotaDTO {
+    private Long cursocompetenciaid;
+    private Long competenciaid;
+    private String nombre;
     private String competenciadescripcion;
-    private String competenciatipo;
-    private Long notaid;
-    private Double nota;
-    private Long componentenotaid;
+    private String tipo;
+    private Long cursoid;
     private String componentecodigo;
     private String componentedescripcion;
+    private String componentepeso;
+    private Double nota;
 }

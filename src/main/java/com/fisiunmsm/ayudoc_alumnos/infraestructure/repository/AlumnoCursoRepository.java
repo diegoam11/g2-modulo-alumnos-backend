@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
+import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +18,6 @@ public interface AlumnoCursoRepository extends R2dbcRepository<AlumnoCursoTable,
     Flux<AlumnoCursoDTO> findCursosByAlumnoId(@Param("alumnoId") Long alumnoId);
 
     Mono<AlumnoCursoTable> findByAlumnoidAndCursoid(Long alumnoId, Long cursoId);
+    Flux<AlumnoTable> findByCursoid(Long cursoId);
 }
 

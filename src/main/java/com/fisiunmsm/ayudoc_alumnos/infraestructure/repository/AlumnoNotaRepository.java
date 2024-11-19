@@ -1,6 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
@@ -48,20 +49,21 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
     )
     Flux<AlumnoNotasFinal> findNotasFinalesConPeriodoByAlumnoId(@Param("alumnoId") Long alumnoId);
 
-    @Query("SELECT an.id as notaid, an.nota, " +
-            "cuco.id AS componentenotaid, cuco.cursoid as curso_id, " +
-            "cuco.codigo as componentecodigo, cuco.descripcion as componentedescripcion " +
-            "FROM cursocomponente cuco " +
-            "INNER JOIN alumnonotas an ON cuco.id = an.componentenotaid " +
-            "AND an.alumnoid = :alumnoId AND an.cursoid = :cursoId " +
-            "LEFT JOIN cursocompetencia cuc ON cuco.cursoid = cuc.cursoid " +
-            "LEFT JOIN competencia cia ON cuc.competenciaid = cia.id " +
-            "WHERE cia.id = :competenciaId " +
-            "GROUP BY an.alumnoid, an.nota, cuco.id, cuco.cursoid, cia.id, " +
-            "cia.codigo, cia.nombre, cuco.codigo, an.id " +
-            "ORDER BY cia.id, cuco.id")
-    Flux<NotasDTO> findNotasByCompetenciaCursoAlumno(
-            @Param("competenciaId") Long competenciaId,
+    @Query("SELECT " +
+            "cucomp.id AS cursocompetenciaid, " +
+            "cia.id AS competenciaid, cia.nombre, cia.descripcion AS competenciadescripcion, cia.tipo, " +
+            "cucomp.cursoid, " +
+            "cuco.codigo AS componentecodigo, cuco.descripcion AS componentedescripcion, cuco.peso AS componentepeso, " +
+            "an.nota " +
+            "FROM cursocompetencia cucomp " +
+            "JOIN componentecompetencia comp ON cucomp.id = comp.cursocompetenciaid " +
+            "JOIN cursocomponente cuco ON comp.cursocomponenteid = cuco.id " +
+            "JOIN alumnonotas an ON (comp.cursocomponenteid = an.componentenotaid) AND (cucomp.cursoid = an.cursoid) " +
+            "JOIN competencia cia ON cucomp.competenciaid = cia.id " +
+            "WHERE cucomp.cursoid = :cursoId AND an.alumnoid = :alumnoId " +
+            "ORDER BY cucomp.competenciaid")
+    Flux<CompetenciaNotaDTO> findNotasCompetenciaByAlumnoAndCurso(
             @Param("cursoId") Long cursoId,
             @Param("alumnoId") Long alumnoId);
+
 }
