@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoService;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoDetalles;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfo;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfoPartOne;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
@@ -51,5 +52,10 @@ public class AlumnoServiceImpl implements AlumnoService {
             alumInfo.setCursosNotas(new ArrayList<>(tuple.getT2()));
             return alumInfo;
         });
+    }
+
+    @Override
+    public Mono<AlumnoDetalles> getInfoAcademicaByUsername(String username) {
+        return alumnoRepository.findAlumnoDetailsByUsername(username);
     }
 }
