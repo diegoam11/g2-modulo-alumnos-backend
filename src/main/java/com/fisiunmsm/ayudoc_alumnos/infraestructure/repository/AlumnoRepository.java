@@ -39,7 +39,9 @@ public interface AlumnoRepository extends R2dbcRepository<AlumnoTable, Long> {
             al.email AS email,
             al.estado AS estado, 
             i.nombreLargo AS universidad, 
-            d.nombre AS facultad
+            d.nombre AS facultad,
+            al.fotoUrl AS foto,
+            pe.descripcion AS plan
         FROM 
             alumno al
         INNER JOIN 
@@ -47,7 +49,9 @@ public interface AlumnoRepository extends R2dbcRepository<AlumnoTable, Long> {
         INNER JOIN 
             departamento d ON d.id = al.departamentoid
         INNER JOIN 
-            usuario u ON u.id = al.usuarioid 
+            usuario u ON u.id = al.usuarioid
+        INNER JOIN
+            planestudios pe ON pe.id = al.planid
         WHERE 
             u.username = :username
         """)

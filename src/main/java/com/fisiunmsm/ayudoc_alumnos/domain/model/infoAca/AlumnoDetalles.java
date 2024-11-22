@@ -18,4 +18,6 @@ public class AlumnoDetalles {
     private String estado;
     private String universidad;
     private String facultad;
+    private String foto;
+    private String plan;
 }

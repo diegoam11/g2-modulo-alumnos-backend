@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 public class CursoController {
     private final CursoService cursoService;
     @GetMapping("/cursos/{id}/codigo")
+
     public Mono<String> obtenerCodigoCurso(@PathVariable Long id) {
         return cursoService.generarCodigo(id);
     }
