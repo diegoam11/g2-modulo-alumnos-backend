@@ -36,7 +36,7 @@ public class JwtProvider {
                     String token = Jwts.builder()
                             .setSubject(userDetails.getUsername())
                             .claim("roles", userDetails.getAuthorities())
-                            .claim("userId", alumno.getUsuarioId()) // Añadir el userId al JWT
+                            .claim("userId", alumno.getId()) // Añadir el userId al JWT
                             .setIssuedAt(new Date())
                             .setExpiration(new Date(new Date().getTime() + EXPIRATION * 1000))
                             .signWith(getSignInKey())
