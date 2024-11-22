@@ -1,6 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnosCursoResponse;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
 import org.springframework.data.r2dbc.repository.Query;
@@ -18,6 +19,13 @@ public interface AlumnoCursoRepository extends R2dbcRepository<AlumnoCursoTable,
     Flux<AlumnoCursoDTO> findCursosByAlumnoId(@Param("alumnoId") Long alumnoId);
 
     Mono<AlumnoCursoTable> findByAlumnoidAndCursoid(Long alumnoId, Long cursoId);
-    Flux<AlumnoTable> findByCursoid(Long cursoId);
+    @Query("SELECT a.id, a.codigo, a.nombres, a.apellidos, a.email, i.nombreLargo as universidad, dp.nombre as escuela " +
+            "FROM alumnocurso ac " +
+            "JOIN alumno a on ac.alumnoid = a.id " +
+            "JOIN institucion i on a.institucionid = i.id " +
+            "JOIN departamento dp on a.departamentoid = dp.id " +
+            "WHERE ac.cursoid=:cursoId " +
+            "ORDER BY a.codigo")
+    Flux<AlumnosCursoResponse> findAlumnosByCursoid(@Param("cursoId") Long cursoId);
 }
 
