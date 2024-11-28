@@ -64,4 +64,12 @@ public class UsuarioService {
                         .map(TokenDto::new))
                 .switchIfEmpty(Mono.error(new CustomException(HttpStatus.BAD_REQUEST, "bad credentials")));
     }
+
+    public  Mono<Usuario> findByUsername(String username) {
+        return usuarioRepository.findByUsername(username);
+    }
+
+    public Mono<Usuario> save(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 }
