@@ -36,6 +36,7 @@ public class Usuario implements UserDetails {
     private LocalDate fechaUltLogin;
     private String roles;
     @Setter
+    @Getter
     @Column("codreiniciarpassword")
     private String codReiniciarPassword;
 
