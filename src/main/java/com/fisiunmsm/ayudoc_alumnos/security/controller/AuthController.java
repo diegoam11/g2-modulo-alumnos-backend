@@ -9,6 +9,7 @@ import com.fisiunmsm.ayudoc_alumnos.validation.CustomValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -19,6 +20,7 @@ public class AuthController {
     private final UsuarioService usuarioService;
     private final CustomValidator customValidator;
     private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("registrar")
     public Mono<Usuario> registrar(@RequestBody CrearUsuarioDto dto) {
@@ -64,4 +66,26 @@ public class AuthController {
                 })
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado.")));
     }
+
+    @PostMapping("reset-password/change")
+    public Mono<ResponseEntity<String>> changePassword(@RequestBody CambiarPasswordDTO dto) {
+        if (dto.getEmail() == null || dto.getEmail().isEmpty() ||
+                dto.getCode() == null || dto.getCode().isEmpty() ||
+                dto.getNewPassword() == null || dto.getNewPassword().isEmpty()) {
+            return Mono.just(ResponseEntity.badRequest().body("El correo, el código y la nueva contraseña no pueden estar vacíos."));
+        }
+
+        return usuarioService.findByUsername(dto.getEmail())
+                .flatMap(usuario -> {
+                    if (!dto.getCode().equals(usuario.getCodReiniciarPassword())) {
+                        return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("El código de reinicio es incorrecto."));
+                    }
+                    usuario.setPassword(passwordEncoder.encode(dto.getNewPassword()));
+                    usuario.setCodReiniciarPassword(null);
+                    return usuarioService.save(usuario)
+                            .then(Mono.just(ResponseEntity.ok("Contraseña cambiada con éxito.")));
+                })
+                .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado.")));
+    }
+
 }

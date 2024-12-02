@@ -24,6 +24,7 @@ public class Usuario implements UserDetails {
     @Getter
     private Long id;
     private String username;
+    @Setter
     private String password;
     @Column("nombrevisualizar")
     private String nombreVisualizar;
