@@ -10,4 +10,5 @@ public interface AlumnoGrupoService {
     Mono<AlumnoGrupoTable> registrarAlumnoEnGrupo(Long alumnoid, Long cursoid, Long grupoid);
     Mono<GrupoResponse> findGrupobyAlumnoIdAndCursoId(Long alumnoid, Long cursoid);
     Flux<AlumnoGrupoResponse> findAlumnosByCursoIdAndGrupoId(Long cursoid, Long grupoid);
+    Flux<AlumnoGrupoResponse> findGruposByCursoId(Long cursoid);
 }

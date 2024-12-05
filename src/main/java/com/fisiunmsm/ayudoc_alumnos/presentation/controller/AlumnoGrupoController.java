@@ -41,4 +41,10 @@ public class AlumnoGrupoController {
     ){
         return grupoService.findAlumnosByCursoIdAndGrupoId(cursoId, grupoId);
     }
+    @GetMapping("/curso/{cursoId}")
+    public Flux<AlumnoGrupoResponse> findAllGruposByCursoId(
+            @PathVariable Long cursoId
+    ){
+        return grupoService.findGruposByCursoId(cursoId);
+    }
 }
