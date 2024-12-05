@@ -1,13 +1,17 @@
 package com.fisiunmsm.ayudoc_alumnos.security.jwt;
 
+import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
+import com.fisiunmsm.ayudoc_alumnos.infraestructure.repository.AlumnoRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import java.security.Key;
 import java.util.Date;
@@ -15,6 +19,7 @@ import java.util.function.Function;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtProvider {
 
     @Value("${jwt.secret}")
@@ -23,16 +28,23 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private long EXPIRATION;
 
-    public String generateToken(UserDetails userDetails){
-        return Jwts
-                .builder()
-                .setSubject(userDetails.getUsername())
-                .claim("roles", userDetails.getAuthorities())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + EXPIRATION * 1000))
-                .signWith(getSignInKey())
-                .compact();
+    private final AlumnoRepository alumnoRepository;
+
+    public Mono<String> generateToken(UserDetails userDetails) {
+        return alumnoRepository.findAlumnobyUsername(userDetails.getUsername())
+                .flatMap(alumno -> {
+                    String token = Jwts.builder()
+                            .setSubject(userDetails.getUsername())
+                            .claim("roles", userDetails.getAuthorities())
+                            .claim("userId", alumno.getId()) // Añadir el userId al JWT
+                            .setIssuedAt(new Date())
+                            .setExpiration(new Date(new Date().getTime() + EXPIRATION * 1000))
+                            .signWith(getSignInKey())
+                            .compact();
+                    return Mono.just(token);
+                });
     }
+
 
     private Key getSignInKey(){
         byte[] keyBytes  = Decoders.BASE64.decode(SECRET_KEY);

@@ -4,8 +4,10 @@ import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoCursoService;
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoService;
 import com.fisiunmsm.ayudoc_alumnos.application.service.CursoService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnosCursoResponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
+import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.inscripcionCurso.AlumnoCursoMapper;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.repository.AlumnoCursoRepository;
 import lombok.AllArgsConstructor;
@@ -55,5 +57,10 @@ public class AlumnoCursoServiceImpl implements AlumnoCursoService {
                 AlumnoCursoTable alumnocurso = alumnoCursoMapper.toAlumnoCurso(request, curso);
                 return alumnoCursoRepository.save(alumnocurso).then();
             });
+    }
+
+    @Override
+    public Flux<AlumnosCursoResponse> findAlumnosByCursoId(Long cursoId) {
+        return alumnoCursoRepository.findAlumnosByCursoid(cursoId);
     }
 }

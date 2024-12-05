@@ -74,4 +74,9 @@ public class CursoServiceImpl implements CursoService {
         });
     }
 
+    @Override
+    public Mono<CursoTable> findCursoTableById(Long id) {
+        return cursoRepository.findById(id);
+    }
+
 }

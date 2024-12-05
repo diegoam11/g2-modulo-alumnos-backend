@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table("curso")
+@Table("cursoDecoder")
 public class CursoTable {
 
     @Id

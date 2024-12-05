@@ -60,7 +60,16 @@ public class UsuarioService {
     public Mono<TokenDto> login(LoginUsuarioDto dto) {
         return usuarioRepository.findByUsername(dto.getUsername())
                 .filter(user -> passwordEncoder.matches(dto.getPassword(), user.getPassword()))
-                .map(user -> new TokenDto(jwtProvider.generateToken(user)))
+                .flatMap(user -> jwtProvider.generateToken(user)
+                        .map(TokenDto::new))
                 .switchIfEmpty(Mono.error(new CustomException(HttpStatus.BAD_REQUEST, "bad credentials")));
+    }
+
+    public  Mono<Usuario> findByUsername(String username) {
+        return usuarioRepository.findByUsername(username);
+    }
+
+    public Mono<Usuario> save(Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
 }

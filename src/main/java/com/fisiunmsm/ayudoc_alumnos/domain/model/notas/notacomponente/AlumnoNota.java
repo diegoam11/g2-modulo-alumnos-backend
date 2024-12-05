@@ -1,4 +1,4 @@
-package com.fisiunmsm.ayudoc_alumnos.domain.model.notas;
+package com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,17 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AlumnoTopReponse {
+public class AlumnoNota {
     private Long alumnoid;
     private Long cursoid;
     private Long componentenotaid;
-    private Long notaid;
     private Double nota;
-    private String nombres;
-    private String apellidos;
-    private String codigoalumno;
     private String descripcion;
-    private Integer posicion;
-    private Integer totalAprobados;
-    private Integer totalDesaprobados;
+    private Long padreid;
+    private Boolean calculado;
+    private Long formulaid;
 }

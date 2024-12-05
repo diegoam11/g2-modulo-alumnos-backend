@@ -1,13 +1,20 @@
 package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
+import com.fisiunmsm.ayudoc_alumnos.application.service.CompetenciaService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.AlumnoTopReponse;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.NotaResponse;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.RankingDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.RankingResultadoDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -15,6 +22,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("v1/notas")
 public class AlumnoNotasController {
     private final AlumnoNotaService notasService;
+    private final CompetenciaService competenciaService;
 
     @GetMapping("/curso/{cursoId}/alumno/{alumnoId}")
     public Mono<NotaResponse> getNotasDeAlumnoEnCurso(
@@ -57,4 +65,16 @@ public class AlumnoNotasController {
     ) {
         return notasService.getCursosAprobadosDesaprobados(alumnoId);
     }
+
+    @GetMapping("/competencias/curso/{cursoId}/alumno/{alumnoId}")
+    public Flux<CompetenciaNotaDTO> findNotasCompetenciaByAlumnoAndCurso(
+            @PathVariable Long cursoId,
+            @PathVariable Long alumnoId) {
+        return notasService.findNotasCompetenciaByAlumnoAndCurso(cursoId, alumnoId);
+    }
+    @GetMapping("/ranking/{cursoId}")
+    public Mono<List<RankingResultadoDTO>> rankingCompetencia(@PathVariable Long cursoId) {
+        return competenciaService.rankingCompetencia(cursoId); // Ya devuelve un Mono<List<RankingResultadoDTO>>
+    }
+
 }

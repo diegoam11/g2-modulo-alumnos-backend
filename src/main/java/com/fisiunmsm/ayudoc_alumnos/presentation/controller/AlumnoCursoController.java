@@ -4,6 +4,7 @@ import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoCursoService;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoCursoDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnosCursoResponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.inscripcionCurso.InscripcionRequest;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoCursoTable;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api-alucur/v1")
-@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("v1/alucur")
+@CrossOrigin
 @RequiredArgsConstructor
 public class AlumnoCursoController {
     private final AlumnoCursoService alumnoCursoService;
@@ -48,6 +49,8 @@ public class AlumnoCursoController {
                         Mono.just(ResponseEntity.status(400).body(ex.getMessage())) // 400 Bad Request con el mensaje de error personalizado
                 );
     }
-
-
+    @GetMapping("/alumnos/{cursoId}")
+    public Flux<AlumnosCursoResponse> getAlumnosbyCursoId(@PathVariable Long cursoId) {
+        return alumnoCursoService.findAlumnosByCursoId(cursoId);
+    }
 }

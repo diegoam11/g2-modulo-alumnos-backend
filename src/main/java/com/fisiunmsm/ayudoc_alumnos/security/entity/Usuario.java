@@ -1,10 +1,7 @@
 package com.fisiunmsm.ayudoc_alumnos.security.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -27,6 +24,7 @@ public class Usuario implements UserDetails {
     @Getter
     private Long id;
     private String username;
+    @Setter
     private String password;
     @Column("nombrevisualizar")
     private String nombreVisualizar;
@@ -38,6 +36,10 @@ public class Usuario implements UserDetails {
     @Column("fechaultlogin")
     private LocalDate fechaUltLogin;
     private String roles;
+    @Setter
+    @Getter
+    @Column("codreiniciarpassword")
+    private String codReiniciarPassword;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,5 +77,6 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
 
