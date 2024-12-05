@@ -10,4 +10,6 @@ public class AlumnoCursoDTO {
     private String codigo;
     private String tipo;
     private String estado;
+    private String ciclo;
+    private int numcreditos;
 }

@@ -36,4 +36,9 @@ public class AlumnoGrupoServiceImpl implements AlumnoGrupoService {
     public Flux<AlumnoGrupoResponse> findAlumnosByCursoIdAndGrupoId(Long cursoid, Long grupoid) {
         return alumnoGrupoRepository.findAlumnosByCursoIdAndGrupoId(cursoid,grupoid);
     }
+
+    @Override
+    public Flux<AlumnoGrupoResponse> findGruposByCursoId(Long cursoid) {
+        return alumnoGrupoRepository.findAllGruposByCursoId(cursoid);
+    }
 }

@@ -27,4 +27,12 @@ public interface AlumnoGrupoRepository extends R2dbcRepository<AlumnoGrupoTable,
             "WHERE ac.cursoid = :cursoId AND ag.grupoid = :grupoId ")
     Flux<AlumnoGrupoResponse> findAlumnosByCursoIdAndGrupoId(
     @Param("cursoId") Long cursoId, @Param("grupoId") Long grupoId);
+
+    @Query("select a.id as alumnoid, a.codigo as alumnocodigo, a.nombres, a.apellidos, a.email, " +
+            "ag.grupoid, ac.estado, ac.cursoid " +
+            "FROM alumnocurso ac " +
+            "join alumno a on ac.alumnoid = a.id " +
+            "join alumnogrupo ag on ac.id = ag.alumnocursoid " +
+            "WHERE ac.cursoid = :cursoId AND ac.estado=1 order by ag.grupoid")
+    Flux<AlumnoGrupoResponse> findAllGruposByCursoId(@Param("cursoId") Long cursoId);
 }

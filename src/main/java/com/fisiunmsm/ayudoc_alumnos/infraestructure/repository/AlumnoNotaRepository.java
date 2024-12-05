@@ -3,6 +3,7 @@ package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.RankingDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.AlumnoNotasTable;
@@ -65,5 +66,19 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
     Flux<CompetenciaNotaDTO> findNotasCompetenciaByAlumnoAndCurso(
             @Param("cursoId") Long cursoId,
             @Param("alumnoId") Long alumnoId);
+    @Query("select an.alumnoid, a.nombres, a.apellidos,a.codigo as alumnocodigo,  " +
+            "cucomp.id AS cursocompetenciaid, " +
+            "cia.id AS competenciaid, cucomp.cursoid, cia.codigo as competenciacodigo ,cia.nombre as nombrecompetencia, cia.descripcion AS competenciadescripcion, " +
+            "cuco.peso AS componentepeso, " +
+            "an.nota " +
+            "from cursocompetencia cucomp " +
+            "join componentecompetencia comp on cucomp.id = comp.cursocompetenciaid " +
+            "join cursocomponente cuco on comp.cursocomponenteid = cuco.id " +
+            "join alumnonotas an on (comp.cursocomponenteid = an.componentenotaid) AND (cucomp.cursoid = an.cursoid) " +
+            "join competencia cia on cucomp.competenciaid = cia.id " +
+            "join alumno a on an.alumnoid = a.id " +
+            "WHERE cucomp.cursoid = :cursoId " +
+            "ORDER BY an.alumnoid, cucomp.competenciaid")
+    Flux<RankingDTO> findRankingCompetenciaByCursoId(@Param("cursoId") Long cursoId);
 
 }
