@@ -80,7 +80,7 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
             "ORDER BY an.alumnoid, cucomp.competenciaid")
     Flux<RankingDTO> findRankingCompetenciaByCursoId(@Param("cursoId") Long cursoId);
 
-    @Query(" SELECT DISTINCT an.alumnoid, " +
+    @Query(" SELECT DISTINCT an.alumnoid, c.nombre," +
             "an.cursoid, cc.id AS componentenotaid, an.nota, cc.peso, cc.nivel, " +
             "CASE WHEN cc.descripcion LIKE 'Componente %' AND cc.descripcion NOT LIKE 'Componente N%' " +
             "THEN CONCAT('Componente N', SUBSTRING_INDEX(cc.descripcion, ' ', -1))  ELSE cc.descripcion " +
@@ -89,7 +89,8 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
             "FROM alumnonotas an  " +
             "JOIN cursocomponente cc " +
             "ON an.componentenotaid = cc.id AND an.alumnoid = :alumnoId " +
-            "JOIN alumnocurso ac  ON an.alumnoid = ac.alumnoid" +
+            "JOIN alumnocurso ac  ON an.alumnoid = ac.alumnoid " +
+            "JOIN cursoDecoder c ON an.cursoid = c.id AND ac.cursoid = c.id " +
             " WHERE cc.nivel = 2 AND ac.estado = 1 " +
             "ORDER BY cc.id")
     Flux<AlumnoNota> findNotasEvaluaciones(@Param("alumnoId") Long alumnoId);

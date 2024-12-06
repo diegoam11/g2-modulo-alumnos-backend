@@ -12,6 +12,7 @@ import lombok.Setter;
 public class AlumnoNota {
     private Long alumnoid;
     private Long cursoid;
+    private String nombre;
     private Long componentenotaid;
     private Double nota;
     private String descripcion;
