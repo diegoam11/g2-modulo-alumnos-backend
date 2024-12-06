@@ -24,15 +24,15 @@ public class AlumnoTable {
     private String apellidos;
     private String email;
     private String estado;
-    private String institucionId;
-    private String departamentoId;
+    private Long institucionid;
+    private Long departamentoid;
     @Column("usuarioid")
     private Long usuarioId;
 
     public Alumno toDomainModel(){
         return new Alumno(
                 id, codigo, nombres, apellidos, email, estado,
-                institucionId, departamentoId, usuarioId);
+                institucionid, departamentoid, usuarioId);
     }
 
     public Mono<Alumno> toMono(){

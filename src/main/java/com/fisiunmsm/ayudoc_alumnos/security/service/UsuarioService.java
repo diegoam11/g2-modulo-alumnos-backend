@@ -49,6 +49,9 @@ public class UsuarioService {
                                         .apellidos(dto.getApellidos())
                                         .email(dto.getEmail())
                                         .usuarioId(savedUser.getId())
+                                        .estado("1")
+                                        .institucionid(dto.getInstitucionid())
+                                        .departamentoid(dto.getDepartamentoid())
                                         .build();
                                 return alumnoRepository.save(alumno)
                                         .thenReturn(savedUser);
