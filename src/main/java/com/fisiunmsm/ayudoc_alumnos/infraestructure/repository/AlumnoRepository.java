@@ -11,14 +11,13 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface AlumnoRepository extends R2dbcRepository<AlumnoTable, Long> {
-    @Query("SELECT a.*, i.nombreLargo AS universidad, pe.descripcion AS plan, d2.nombre AS facultad" + 
-            " FROM usuario u" + 
-            " JOIN alumno a ON u.id = a.usuarioid" +
-            " JOIN institucion i on a.institucionid = i.id" + 
-            " LEFT JOIN planestudios pe ON a.planid = pe.id" +
-            " LEFT JOIN departamento d1 ON d1.id = pe.departamentoid" + 
-            " LEFT JOIN departamento d2 ON d2.id = d1.departamentoid" + 
-            " WHERE u.username = :username"
+    @Query("SELECT a.*, i.nombreLargo AS universidad, de.nombre as facultad, pe.descripcion as plan " +
+            "FROM usuario u " +
+            "JOIN alumno a ON u.id = a.usuarioid " +
+            "JOIN institucion i ON a.institucionid = i.id " +
+            "JOIN departamento de on a.departamentoid = de.id " +
+            "LEFT JOIN planestudios pe on i.id = pe.id " +
+            "WHERE u.username = :username"
     )
     Mono<AlumnoInfoDTO> findAlumnobyUsername(@Param("username") String username);
     @Query("SELECT a.id " +
