@@ -20,15 +20,25 @@ public class AlumnoGrupoController {
     private final AlumnoGrupoService grupoService;
 
     @PostMapping("/asignar")
-    public Mono<ResponseEntity<AlumnoGrupoTable>> asignarAlumnoAGrupo(
+    public Mono<ResponseEntity<String>> asignarAlumnoAGrupo(
             @RequestBody Map<String, Object> request) {
         Long alumnoid = ((Number) request.get("alumnoid")).longValue();
         Long cursoid = ((Number) request.get("cursoid")).longValue();
         Long grupoid = ((Number) request.get("grupoid")).longValue();
 
-        return grupoService.registrarAlumnoEnGrupo(alumnoid, cursoid, grupoid)
-                .map(ResponseEntity::ok)
-                .onErrorResume(ex -> Mono.just(ResponseEntity.badRequest().build()));
+        // Verificar si el alumno ya está inscrito en un grupo para el curso
+        return grupoService.findGrupobyAlumnoIdAndCursoId(alumnoid, cursoid)
+                .flatMap(existingGroup ->
+                        // Si ya está inscrito, devolver un error
+                        Mono.just(ResponseEntity.badRequest()
+                                .body("El alumno ya está inscrito en otro grupo del curso.")))
+                .switchIfEmpty(
+                        // Si no está inscrito, proceder con la inscripción
+                        grupoService.registrarAlumnoEnGrupo(alumnoid, cursoid, grupoid)
+                                .map(savedGroup -> ResponseEntity.ok("Alumno inscrito correctamente"))
+                                .onErrorResume(ex -> Mono.just(ResponseEntity.badRequest()
+                                        .body("Ocurrió un error al inscribir al alumno.")))
+                );
     }
     @GetMapping("/curso/{cursoId}/alumno/{alumnoId}")
     public Mono<GrupoResponse> findGrupoByAlumnoIdAndCursoId(
