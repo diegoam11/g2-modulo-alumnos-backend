@@ -2,7 +2,6 @@ package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.RankingDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
@@ -81,4 +80,17 @@ public interface AlumnoNotaRepository extends R2dbcRepository<AlumnoNotasTable, 
             "ORDER BY an.alumnoid, cucomp.competenciaid")
     Flux<RankingDTO> findRankingCompetenciaByCursoId(@Param("cursoId") Long cursoId);
 
+    @Query(" SELECT DISTINCT an.alumnoid, " +
+            "an.cursoid, cc.id AS componentenotaid, an.nota, cc.peso, cc.nivel, " +
+            "CASE WHEN cc.descripcion LIKE 'Componente %' AND cc.descripcion NOT LIKE 'Componente N%' " +
+            "THEN CONCAT('Componente N', SUBSTRING_INDEX(cc.descripcion, ' ', -1))  ELSE cc.descripcion " +
+            "END AS descripcion, " +
+            "cc.padreid AS padreid, cc.calculado AS calculado, cc.formulaid AS formulaid " +
+            "FROM alumnonotas an  " +
+            "JOIN cursocomponente cc " +
+            "ON an.componentenotaid = cc.id AND an.alumnoid = :alumnoId " +
+            "JOIN alumnocurso ac  ON an.alumnoid = ac.alumnoid" +
+            " WHERE cc.nivel = 2 AND ac.estado = 1 " +
+            "ORDER BY cc.id")
+    Flux<AlumnoNota> findNotasEvaluaciones(@Param("alumnoId") Long alumnoId);
 }

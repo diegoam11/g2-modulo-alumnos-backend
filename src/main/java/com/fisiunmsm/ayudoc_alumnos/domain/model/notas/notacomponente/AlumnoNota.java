@@ -18,4 +18,6 @@ public class AlumnoNota {
     private Long padreid;
     private Boolean calculado;
     private Long formulaid;
+    private Long nivel;
+    private Double peso;
 }
