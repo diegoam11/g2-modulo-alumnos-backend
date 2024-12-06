@@ -26,14 +26,11 @@ public class AlumnoGrupoController {
         Long cursoid = ((Number) request.get("cursoid")).longValue();
         Long grupoid = ((Number) request.get("grupoid")).longValue();
 
-        // Verificar si el alumno ya está inscrito en un grupo para el curso
         return grupoService.findGrupobyAlumnoIdAndCursoId(alumnoid, cursoid)
                 .flatMap(existingGroup ->
-                        // Si ya está inscrito, devolver un error
                         Mono.just(ResponseEntity.badRequest()
                                 .body("El alumno ya está inscrito en otro grupo del curso.")))
                 .switchIfEmpty(
-                        // Si no está inscrito, proceder con la inscripción
                         grupoService.registrarAlumnoEnGrupo(alumnoid, cursoid, grupoid)
                                 .map(savedGroup -> ResponseEntity.ok("Alumno inscrito correctamente"))
                                 .onErrorResume(ex -> Mono.just(ResponseEntity.badRequest()
