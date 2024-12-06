@@ -3,7 +3,7 @@ package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.notas.NotaMapper;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
 @Service
 @RequiredArgsConstructor
 public class AlumnoNotaServiceImpl implements AlumnoNotaService {
@@ -37,6 +38,11 @@ public class AlumnoNotaServiceImpl implements AlumnoNotaService {
     @Override
     public Flux<CompetenciaNotaDTO> findNotasCompetenciaByAlumnoAndCurso(Long cursoId, Long alumnoId) {
         return alumnoNotaRepository.findNotasCompetenciaByAlumnoAndCurso(cursoId, alumnoId);
+    }
+
+    @Override
+    public Flux<AlumnoNota> findNotasEvaluaciones(Long cursoId) {
+        return alumnoNotaRepository.findNotasEvaluaciones(cursoId);
     }
 
 }

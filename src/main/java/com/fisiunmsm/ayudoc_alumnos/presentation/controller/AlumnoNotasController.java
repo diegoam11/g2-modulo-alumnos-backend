@@ -4,9 +4,8 @@ import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
 import com.fisiunmsm.ayudoc_alumnos.application.service.CompetenciaService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoNotasFinal;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.CompetenciaNotaDTO;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.NotasDTO;
-import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.RankingDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.competencianota.RankingResultadoDTO;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.AlumnoNota;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.top5.AlumnoTopReponse;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.notas.notacomponente.NotaResponse;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +50,8 @@ public class AlumnoNotasController {
     public Mono<List<RankingResultadoDTO>> rankingCompetencia(@PathVariable Long cursoId) {
         return competenciaService.rankingCompetencia(cursoId); // Ya devuelve un Mono<List<RankingResultadoDTO>>
     }
-
+    @GetMapping("/evaluaciones/{alumnoId}")
+    public Flux<AlumnoNota> findNotasEvaluaciones(@PathVariable Long alumnoId) {
+        return notasService.findNotasEvaluaciones(alumnoId);
+    }
 }
