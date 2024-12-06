@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.application.serviceImpl;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoNotaService;
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoService;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoInfoDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfo;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfoPartOne;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
@@ -31,8 +32,8 @@ public class AlumnoServiceImpl implements AlumnoService {
         return alumnoRepository.findById(id).flatMap(AlumnoTable::toMono);
     }
     @Override
-    public Mono<Alumno> findAlumnoByUsername(String username) {
-        return alumnoRepository.findAlumnobyUsername(username).flatMap(AlumnoTable::toMono);
+    public Mono<AlumnoInfoDTO> findAlumnoByUsername(String username) {
+        return alumnoRepository.findAlumnobyUsername(username);
     }
 
     @Override

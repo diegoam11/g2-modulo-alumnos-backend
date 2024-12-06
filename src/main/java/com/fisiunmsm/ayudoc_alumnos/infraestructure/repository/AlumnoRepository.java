@@ -1,5 +1,6 @@
 package com.fisiunmsm.ayudoc_alumnos.infraestructure.repository;
 
+import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoInfoDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfoPartOne;
 import com.fisiunmsm.ayudoc_alumnos.infraestructure.mapper.AlumnoTable;
 import org.springframework.data.r2dbc.repository.Query;
@@ -10,12 +11,16 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface AlumnoRepository extends R2dbcRepository<AlumnoTable, Long> {
-    @Query("SELECT a.* " +
-           " FROM usuario u" +
-           " JOIN alumno a" +
-           " ON u.id = a.usuarioid WHERE username = :username"
+    @Query("SELECT a.*, i.nombreLargo AS universidad, pe.descripcion AS plan, d2.nombre AS facultad" + 
+            " FROM usuario u" + 
+            " JOIN alumno a ON u.id = a.usuarioid" +
+            " JOIN institucion i on a.institucionid = i.id" + 
+            " LEFT JOIN planestudios pe ON a.planid = pe.id" +
+            " LEFT JOIN departamento d1 ON d1.id = pe.departamentoid" + 
+            " LEFT JOIN departamento d2 ON d2.id = d1.departamentoid" + 
+            " WHERE u.username = :username"
     )
-    Mono<AlumnoTable> findAlumnobyUsername(@Param("username") String username);
+    Mono<AlumnoInfoDTO> findAlumnobyUsername(@Param("username") String username);
     @Query("SELECT a.id " +
             " FROM usuario u" +
             " JOIN alumno a" +

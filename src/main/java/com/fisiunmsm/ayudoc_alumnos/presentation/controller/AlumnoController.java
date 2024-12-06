@@ -2,6 +2,7 @@ package com.fisiunmsm.ayudoc_alumnos.presentation.controller;
 
 import com.fisiunmsm.ayudoc_alumnos.application.service.AlumnoService;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.Alumno;
+import com.fisiunmsm.ayudoc_alumnos.domain.model.AlumnoInfoDTO;
 import com.fisiunmsm.ayudoc_alumnos.domain.model.infoAca.AlumnoInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +28,9 @@ public class AlumnoController {
     }
 
     @GetMapping("/user/{username}")
-    public Mono<Alumno> findByUsername(@PathVariable String username) {
+    public Mono<AlumnoInfoDTO> findByUsername(@PathVariable String username) {
         return alumnoService.findAlumnoByUsername(username);
-    }
+    }   
 
     @GetMapping("/get-info-academica/{alumnoId}")
     public Mono<AlumnoInfo> getInfoAcademica(@PathVariable Long alumnoId) {
