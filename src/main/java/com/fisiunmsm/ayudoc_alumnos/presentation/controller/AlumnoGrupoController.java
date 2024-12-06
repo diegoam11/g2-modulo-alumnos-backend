@@ -25,7 +25,7 @@ public class AlumnoGrupoController {
         Long alumnoid = ((Number) request.get("alumnoid")).longValue();
         Long cursoid = ((Number) request.get("cursoid")).longValue();
         Long grupoid = ((Number) request.get("grupoid")).longValue();
-
+         //validacion
         return grupoService.findGrupobyAlumnoIdAndCursoId(alumnoid, cursoid)
                 .flatMap(existingGroup ->
                         Mono.just(ResponseEntity.badRequest()
